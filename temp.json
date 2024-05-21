@@ -1,0 +1,56 @@
+// 카테고리 미선택
+{
+    "status": 200,
+    "message": "Category is not selected.",
+    "data": []
+  }
+  
+  // 카테고리 선택
+  {
+    "status": 200,
+    "message": "Successfully retrieved the restaurant list.",
+    "data": [
+      {
+        "Category1List": [
+          {
+            "restaurantId": 1,
+            "restaurantName": "Restaurant A",
+            "restaurantAddress": "Address A",
+            "restaurantLatitude": "37.5665",
+            "restaurantLongitude": "126.9780",
+            "restaurantReviewCount": 10,
+            "restaurantRating": "4.5"
+          },
+          {
+            "restaurantId": 2,
+            "restaurantName": "Restaurant B",
+            "restaurantAddress": "Address B",
+            "restaurantLatitude": "37.5670",
+            "restaurantLongitude": "126.9790",
+            "restaurantReviewCount": 20,
+            "restaurantRating": "4.2"
+          }
+        ],
+        "Category2List": [
+          {
+            "restaurantId": 3,
+            "restaurantName": "Restaurant C",
+            "restaurantAddress": "Address C",
+            "restaurantLatitude": "37.5680",
+            "restaurantLongitude": "126.9800",
+            "restaurantReviewCount": 5,
+            "restaurantRating": "4.8"
+          }
+          {
+            "restaurantId": 2,
+            "restaurantName": "Restaurant B",
+            "restaurantAddress": "Address B",
+            "restaurantLatitude": "37.5670",
+            "restaurantLongitude": "126.9790",
+            "restaurantReviewCount": 20,
+            "restaurantRating": "4.2"
+          }
+        ]
+      }
+    ]
+  }
