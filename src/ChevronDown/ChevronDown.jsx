@@ -1,10 +1,10 @@
-// import styles from "./ChevronDown.module.css";
+import styles from "./ChevronDown.module.css";
 
-// export const ChevronDown = ({ className, ...props }) => {
-//   return (
-//     <img
-//       className={styles.chevronDown + " " + className}
-//       src="chevron-down.svg"
-//     />
-//   );
-// };
+export const ChevronDown = ({ className, ...props }) => {
+  return (
+    <img
+      className={styles.chevronDown + " " + className}
+      src="chevron-down.svg"
+    />
+  );
+};
