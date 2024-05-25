@@ -1,42 +1,83 @@
 import CustomMapMarker from "./CustomMapMarker";
 
-// 마커 담을 배열 생성
+// Create an array to hold markers
 const markers: naver.maps.Marker[] = [];
 
-export const addMarker = (naver, map, id, name, lat, lng, windowWidth) => {
+// update markers
+function updateMarkers(map, markers) {
+  var mapBounds = map.getBounds();
+  var marker, position;
+
+  for (var i = 0; i < markers.length; i++) {
+
+      marker = markers[i]
+      position = marker.getPosition();
+
+      if (mapBounds.hasLatLng(position)) {
+          showMarker(map, marker);
+      } else {
+          hideMarker(map, marker);
+      }
+  }
+}
+
+// show marker on map
+function showMarker(map, marker) {
+    if (marker.setMap()) return;
+    marker.setMap(map);
+}
+
+// hide marker on map
+function hideMarker(map, marker) {
+
+    if (!marker.setMap()) return;
+    marker.setMap(null);
+}
+
+//add a single marker
+export const addMarker = (naver, map, id, name, position, windowWidth, anchor, zoom) => {
   try {
     const markerContent = CustomMapMarker({
       title: name,
       windowWidth: windowWidth,
-      VEGAN: true, // 현재는 모든 플래그를 true로 설정
+      VEGAN: true, // Currently set all flags to true
       HALAL: true,
       GLUTEN_FREE: false,
       LOCTO_FREE: true,
     });
 
     let newMarker = new naver.maps.Marker({
-      position: new naver.maps.LatLng(lat, lng),
+      position,
       map,
       icon: {
         content: markerContent,
-        anchor: new naver.maps.Point(16, 16), // 앵커 포인트는 필요에 따라 조정
+        anchor, // Adjust anchor point as needed
       },
       title: name,
       clickable: true,
     });
 
     newMarker.setTitle(name);
-    // 마커 리스트에 추가
-
+    
+    // Add marker to the marker list
     markers.push(newMarker);
-    //마커에 이벤트 핸들러 등록
+
+    // Register event handler for the marker
     naver.maps.Event.addListener(newMarker, "click", () =>
       markerClickHandler(id)
     );
 
+    naver.maps.Event.addListener(map, 'zoom_changed', function() {
+      updateMarkers(map, markers);
+    });
+
+    naver.maps.Event.addListener(map, 'dragend', function() {
+      updateMarkers(map, markers);
+    });
+
     const markerClickHandler = (id) => {
       // if (infowindow.getMap()) {
-      //   infowindow.close();b
+      //   infowindow.close();
       // } else {
       //   infowindow.open(map, marker);
       // }
@@ -46,10 +87,12 @@ export const addMarker = (naver, map, id, name, lat, lng, windowWidth) => {
   }
 };
 
-export const addMarkers = (naver, map, totalDataArray, windowWidth) => {
+export const addMarkers = (naver, map, totalDataArray, windowWidth, anchor, zoom) => {
   for (let i = 0; i < totalDataArray.length; i++) {
     let markerObj = totalDataArray[i];
     const { dom_id, title, lat, lng } = markerObj;
-    addMarker(naver, map, dom_id, title, lat, lng, windowWidth);
+
+  const position = new naver.maps.LatLng(lat, lng);
+  addMarker(naver, map, dom_id, title, position, windowWidth, anchor, zoom);
   }
 };

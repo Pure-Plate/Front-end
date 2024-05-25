@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom"; // React Router Dom for navigation
-import styles from "./Map.module.css";
-import profile from "../Profile/Profile.jsx";
 import CustomMapMarker from "./Marker/CustomMapMarker.jsx";
 import { addMarkers } from "./Marker/Marker.jsx"; // markers.js 파일에서 함수 import
 
@@ -82,9 +80,8 @@ const MapNaverCur = () => {
       { dom_id: "6", title: "Marker 6", lat: 37.6579, lng: 127.0495 }
     ];
     
-    // 임시로 만든 마커 하나
+    // 임시로 만든 마커
     const name = "잘빠진 메밀";
-
     const marker = new naver.maps.Marker({
       position: location,
       map: map,
@@ -96,9 +93,11 @@ const MapNaverCur = () => {
       },
     });
 
+    const zoom = mapOptions.zoom;
     const windowWidth = window.innerWidth;
+    var anchor = new naver.maps.Point(16, 16);
 
-    addMarkers(naver, map, totalDataArray, windowWidth);
+    addMarkers(naver, map, totalDataArray, windowWidth, anchor, zoom);
   }, [myLocation, naver]);
 
   return <div ref={mapElement} style={{ minHeight: "100vh" }} />;

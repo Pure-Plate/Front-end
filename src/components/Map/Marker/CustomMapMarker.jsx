@@ -1,3 +1,7 @@
+/*
+  CustomMapMaker은 htmlIcon의 요소로, html리터럴로 작성되어야 한다. 이를 수정하려고 할 경우, 에러가 날 수 있다.
+*/
+
 const CustomMapMarker = ({
   title,
   windowWidth,
@@ -5,13 +9,6 @@ const CustomMapMarker = ({
   HALAL,
   GLUTEN_FREE,
   LOCTO_FREE,
-}: {
-  title: string,
-  windowWidth: number,
-  VEGAN: boolean,
-  HALAL: boolean,
-  GLUTEN_FREE: boolean,
-  LOCTO_FREE: boolean,
 }) => {
   const renderImageContainer = (condition, imageUrl) => {
     if (condition) {
