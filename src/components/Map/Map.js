@@ -1,15 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom"; // React Router Dom for navigation
 import CustomMapMarker from "./Marker/CustomMapMarker.jsx";
 import { addMarkers } from "./Marker/Marker.jsx"; // markers.js 파일에서 함수 import
+// import MarkerCluster from "./Marker/MarkerCluster.jsx";
 
 const MapNaverCur = () => {
   const mapElement = useRef(null);
   const { naver } = window;
   const [myLocation, setMyLocation] = useState({ latitude: 0, longitude: 0 });
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-  const navigate = useNavigate(); // Hook for navigation
+  // const navigate = useNavigate(); // Hook for navigation
 
+  // Update viewport size
   useEffect(() => {
     const handleResize = () => {
       setViewportWidth(window.innerWidth);
@@ -22,6 +24,7 @@ const MapNaverCur = () => {
     };
   }, []);
 
+  // Get User's current location
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error);
@@ -38,14 +41,15 @@ const MapNaverCur = () => {
   function error() {
     setMyLocation({ latitude: 37.4979517, longitude: 127.0276188 });
   }
+
+  // Initialize Map
   useEffect(() => {
     if (
       !mapElement.current ||
       !naver ||
       !myLocation.latitude ||
       !myLocation.longitude
-    )
-      return;
+    ) return;
 
     const location = new naver.maps.LatLng(
       myLocation.latitude,
@@ -67,6 +71,7 @@ const MapNaverCur = () => {
       mapDataControl: false,
     };
 
+    // Map implementation
     const map = new naver.maps.Map(mapElement.current, mapOptions);
 
     /* 마커 구현 
@@ -77,27 +82,15 @@ const MapNaverCur = () => {
       { dom_id: "3", title: "Marker 3", lat: 37.6615, lng: 127.0604 },
       { dom_id: "4", title: "Marker 4", lat: 37.6468, lng: 127.0473 },
       { dom_id: "5", title: "Marker 5", lat: 37.6501, lng: 127.0647 },
-      { dom_id: "6", title: "Marker 6", lat: 37.6579, lng: 127.0495 }
+      { dom_id: "5", title: "Marker 5", lat: 37.6501, lng: 127.0647 },
+      { dom_id: "6", title: "잘빠진 메밀", lat: 37.625876, lng: 127.0787062 }
     ];
     
-    // 임시로 만든 마커
-    const name = "잘빠진 메밀";
-    const marker = new naver.maps.Marker({
-      position: location,
-      map: map,
-      title: name,
-      icon: {
-        content: CustomMapMarker({ title: name, windowWidth: viewportWidth }),
-        size: new naver.maps.Size(38, 58),
-        anchor: new naver.maps.Point(19, 58),
-      },
-    });
-
     const zoom = mapOptions.zoom;
     const windowWidth = window.innerWidth;
-    var anchor = new naver.maps.Point(16, 16);
 
-    addMarkers(naver, map, totalDataArray, windowWidth, anchor, zoom);
+    // 마커 추가
+    addMarkers(naver, map, totalDataArray, windowWidth, zoom);
   }, [myLocation, naver]);
 
   return <div ref={mapElement} style={{ minHeight: "100vh" }} />;

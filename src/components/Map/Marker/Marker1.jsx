@@ -1,5 +1,5 @@
 import CustomMapMarker from "./CustomMapMarker";
-import { createInfoWindow } from "../InfoWindow/InfoWindow.jsx";
+import InfoWindowComponent from '../InfoWindow/InfoWindow.jsx';
 // import MarkerClustering from "./MarkerClustering.js";
 
 // Create an array to hold markers
@@ -34,8 +34,8 @@ function hideMarker(map, marker) {
   marker.setMap(null);
 }
 
-// add a single marker
-export const addMarker = (naver, map, id, name, position, windowWidth, zoom) => {
+//add a single marker
+export const addMarker = (naver, map, id, name, position, windowWidth, anchor, zoom) => {
   try {
     const markerContent = CustomMapMarker({
       title: name,
@@ -51,6 +51,7 @@ export const addMarker = (naver, map, id, name, position, windowWidth, zoom) => 
       map,
       icon: {
         content: markerContent,
+        anchor, // Adjust anchor point as needed
       },
       title: name,
       clickable: true,
@@ -70,20 +71,24 @@ export const addMarker = (naver, map, id, name, position, windowWidth, zoom) => 
       updateMarkers(map, markers);
     });
 
-    // InfoWindow Add
-    createInfoWindow(naver, map, newMarker, name);
     
+    /* InfoWindow */
+    const InfoContent = [];
+    
+    // InfoWindow Add */
+    <InfoWindowComponent map={map} marker={newMarker} content={InfoContent} />;
+  
   } catch (e) {
     console.error(e);
   }
 };
 
-export const addMarkers = (naver, map, totalDataArray, windowWidth, zoom) => {
+export const addMarkers = (naver, map, totalDataArray, windowWidth, anchor, zoom) => {
   for (let i = 0; i < totalDataArray.length; i++) {
     let markerObj = totalDataArray[i];
     const { dom_id, title, lat, lng } = markerObj;
 
     const position = new naver.maps.LatLng(lat, lng);
-    addMarker(naver, map, dom_id, title, position, windowWidth, zoom);
+    addMarker(naver, map, dom_id, title, position, windowWidth, anchor, zoom);
   }
 };
