@@ -1,6 +1,4 @@
-import { useState } from "react";
 import styles from "./Search.module.css";
-import SearchButton from "./SearchButton.jsx";
 import searchIcon from '../../assets/Icons/search.png';
 
 const SearchBar = ({ onSubmit }) => {
