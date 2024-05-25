@@ -1,22 +1,17 @@
-name: Deploy Frontend to EC2
+name: Deploy Frontend
 
 on:
   push:
     branches:
-      - release-test 
+      - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.EC2_KEY }}
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -25,7 +20,7 @@ jobs:
 
     - name: Set environment variable
       run: echo "REACT_APP_CI=false" >> $GITHUB_ENV
-      
+
     - name: Check Node.js version
       run: node -v
 
@@ -34,23 +29,29 @@ jobs:
         npm install
         npm run build
 
+    - name: Build Docker image
+      run: |
+        docker build -t your-dockerhub-username/frontend:latest .
+
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-    - name: Build Docker image
-      run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/pureplate-front:latest .
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
     - name: Push Docker image to Docker Hub
-      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/pureplate-front:latest
+      run: docker push your-dockerhub-username/frontend:latest
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.EC2_KEY }}
 
     - name: Deploy to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/pureplate-front:latest
-          docker stop pureplate-front || true
-          docker rm pureplate-front || true
-          docker run -d -p 80:80 --name pureplate-front ${{ secrets.DOCKER_HUB_USERNAME }}/pureplate-front:latest
+        ssh -o StrictHostKeyChecking=no ubuntu@your-ec2-ip-address << 'EOF'
+          docker pull your-dockerhub-username/frontend:latest
+          docker stop frontend || true
+          docker rm frontend || true
+          docker run -d --name frontend -p 80:80 your-dockerhub-username/frontend:latest
         EOF
