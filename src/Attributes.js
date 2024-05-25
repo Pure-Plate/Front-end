@@ -1,6 +1,6 @@
 import styles from "./Pureplate/Pureplate.module.css";
-import { AttributesButtonSelectedTrue } from "./AttributesButtonSelectedTrue/AttributesButtonSelectedTrue.jsx";
-import { AttributesButtonSelectedFalse } from "./AttributesButtonSelectedFalse/AttributesButtonSelectedFalse.jsx";
+// import { AttributesButtonSelectedTrue } from "./AttributesButtonSelectedTrue/AttributesButtonSelectedTrue.jsx";
+// import { AttributesButtonSelectedFalse } from "./AttributesButtonSelectedFalse/AttributesButtonSelectedFalse.jsx";
 import Button from "./Button.js";
 
 const attributes = ["Vegan", "Halal", "Gluten-Free", "Lacto-Free"];
