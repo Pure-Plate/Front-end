@@ -3,7 +3,7 @@ name: Deploy Frontend to EC2
 on:
   push:
     branches:
-      - main 
+      - release-test 
 
 jobs:
   deploy:
@@ -25,7 +25,7 @@ jobs:
 
     - name: Check Node.js version
       run: node -v
-      
+
     - name: Install dependencies and build
       run: |
         npm install

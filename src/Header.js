@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Header.module.css";
-import AutoComplete from "./AutoComplete";
+// import AutoComplete from "./AutoComplete";
 
 function Header() {
   const [query, setQuery] = useState("");
