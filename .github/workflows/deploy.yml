@@ -23,6 +23,9 @@ jobs:
       with:
         node-version: '21'
 
+    - name: Set environment variable
+      run: echo "REACT_APP_CI=false" >> $GITHUB_ENV
+      
     - name: Check Node.js version
       run: node -v
 
