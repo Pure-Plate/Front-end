@@ -17,15 +17,15 @@ const CustomWindow = ({ title, image }) => {
                 justify-content: center;
                 align-items: center;
                 gap: 5.735px;
-                border-radius: 0px 0px 10px 10px;
+                background: #FFF;
             ">
                 <!-- rectangle 184 -->
                 <div style="
                     width: 142.231px;
                     height: 220.802px;
-                    border-radius: 7.005px;
+                    border-radius: 7.005px 7.005px 0px 0px;
                     border: 1.171px solid #76C7B7;
-                    background: #FFF;
+                    background: 'transparent';
                 ">
                     <!-- contents -->
                     <div style="
@@ -44,9 +44,9 @@ const CustomWindow = ({ title, image }) => {
                         <div style="
                             flex: 1 0 0;
                             align-self: stretch;
-                            border-radius: 7.005px;
-                            border: 1.171px solid #76C7B7;
-                            background: url(${image || memil}) 50% / cover no-repeat;
+                            border-radius: 7.005px 7.005px 0px 0px;
+                            border-bottom: 1.2px solid #76C7B7;
+                            background: url(${image || memil});
                         ">
                         </div>
                         <!-- Textbox -->

@@ -19,10 +19,7 @@ const CustomMapMarker = ({
     return "";
   };
 
-  VEGAN = true;
-  HALAL = true;
-  GLUTEN_FREE = true;
-  LOCTO_FREE = true;
+
   const mobileContentArray = [
     '<div style="margin: 0; display: flex; align-items: center; padding: 0.5rem; border-radius: 2.3rem; border: 0.2rem solid var(--color--darkgreen); background: #D9F2EF; cursor: pointer; position: relative; z-index: 2">',
     '<div style="width: 2.5rem; height: 2.5rem; background-image: url(Images/markerIcon.svg); background-size: cover; background-position: center; background-repeat: no-repeat; margin-right: 0.5rem;"></div>',

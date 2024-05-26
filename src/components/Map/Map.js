@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom"; // React Router Dom for navigation
-import CustomMapMarker from "./Marker/CustomMapMarker.jsx";
 import { addMarkers } from "./Marker/Marker.jsx"; // markers.js 파일에서 함수 import
 // import MarkerCluster from "./Marker/MarkerCluster.jsx";
 
@@ -9,7 +7,6 @@ const MapNaverCur = () => {
   const { naver } = window;
   const [myLocation, setMyLocation] = useState({ latitude: 0, longitude: 0 });
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-  // const navigate = useNavigate(); // Hook for navigation
 
   // Update viewport size
   useEffect(() => {
@@ -77,14 +74,14 @@ const MapNaverCur = () => {
     /* 마커 구현 
        이 데이터를 백에서 받아와야 함 */
     const totalDataArray = [
-      { dom_id: "1", title: "Marker 1", lat: 37.6543, lng: 127.0560 },
-      { dom_id: "2", title: "Marker 2", lat: 37.6550, lng: 127.0570 },
-      { dom_id: "3", title: "Marker 3", lat: 37.6615, lng: 127.0604 },
-      { dom_id: "4", title: "Marker 4", lat: 37.6468, lng: 127.0473 },
-      { dom_id: "5", title: "Marker 5", lat: 37.6501, lng: 127.0647 },
-      { dom_id: "5", title: "Marker 5", lat: 37.6501, lng: 127.0647 },
-      { dom_id: "6", title: "잘빠진 메밀", lat: 37.625876, lng: 127.0787062 }
+      { dom_id: "1", title: "Marker 1", lat: 37.6543, lng: 127.0560, VEGAN: true, HALAL: false, GLUTEN_FREE: true, LOCTO_FREE: false },
+      { dom_id: "2", title: "Marker 2", lat: 37.6550, lng: 127.0570, VEGAN: false, HALAL: true, GLUTEN_FREE: false, LOCTO_FREE: true },
+      { dom_id: "3", title: "Marker 3", lat: 37.6615, lng: 127.0604, VEGAN: true, HALAL: true, GLUTEN_FREE: false, LOCTO_FREE: false },
+      { dom_id: "4", title: "Marker 4", lat: 37.6468, lng: 127.0473, VEGAN: false, HALAL: false, GLUTEN_FREE: true, LOCTO_FREE: true },
+      { dom_id: "5", title: "강아지빵", lat: 37.6501, lng: 127.0647, VEGAN: true, HALAL: false, GLUTEN_FREE: true, LOCTO_FREE: false },
+      { dom_id: "6", title: "잘빠진 메밀", lat: 37.625876, lng: 127.0787062, VEGAN: true, HALAL: true, GLUTEN_FREE: false, LOCTO_FREE: true }
     ];
+    
     
     const zoom = mapOptions.zoom;
     const windowWidth = window.innerWidth;
