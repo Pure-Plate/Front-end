@@ -1,0 +1,66 @@
+.starFrame {
+  position: absolute;
+  top: 80px;
+  right: 25px;
+  display: flex;
+  width: 72px;
+  height: 96px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.starInCircle {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.star {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  /* background-image: url("../../assets/Icons/bookmark_star.svg"); */
+  background-image: url("../../assets/Icons/bookmark_star.png");
+  filter: invert(87%) sepia(0%) saturate(1%) hue-rotate(282deg) brightness(92%)
+    contrast(88%);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.clicked {
+  filter: invert(0%) sepia(10%) saturate(2741%) hue-rotate(359deg)
+    brightness(103%) contrast(97%);
+}
+
+/* .star:clicked{
+    /* background-image: url("../../assets/Icons/bookmark_star_clicked.svg");
+    filter: invert(75%) sepia(0%) saturate(0%) hue-rotate(16deg) brightness(105%) contrast(87%);
+    fill: #FBBC05;
+  }
+   */
+
+.StarName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: #D9D9D9;
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-family: "Noto Sans KR";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 24px */
+}
