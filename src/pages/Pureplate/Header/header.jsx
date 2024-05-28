@@ -3,6 +3,7 @@ import styles from "./header.module.css";
 import SearchBar from "../../../components/Search/SearchBar.js";
 import Attributes from "../../../components/DietAttributes/DietAttributes.js";
 import Profile from "../../../components/Profile/Profile.jsx";
+import Bookmark from "../../../components/Bookmark/Star.jsx";
 
 const Header = () => {
   return (
@@ -15,6 +16,7 @@ const Header = () => {
         <Attributes />
         <Profile />
       </div>
+      <Bookmark />
     </header>
   );
 };
