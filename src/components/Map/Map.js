@@ -33,8 +33,8 @@ const MapNaverCur = () => {
 
   // Get data from server
   useEffect(() => {
-    axios.get('/api/restaurant/list/')
-      .then(response => {
+    axios.get('http://127.0.0.1:8000/api/restaurant/list')
+      .then(response => {        
         setRestaurantData(response.data);
         // console.log('Response data:', response.data);
       })
@@ -86,18 +86,6 @@ const MapNaverCur = () => {
     // Map implementation
     const map = new naver.maps.Map(mapElement.current, mapOptions);
 
-    /* 마커 구현 
-       이 데이터를 백에서 받아와야 함 */
-    // const totalDataArray = [
-    //   { id: "1", title: "Marker 1", lat: 37.6543, lng: 127.0560, VEGAN: true, HALAL: false, GLUTEN_FREE: true, LOCTO_FREE: false },
-    //   { id: "2", title: "Marker 2", lat: 37.6550, lng: 127.0570, VEGAN: false, HALAL: true, GLUTEN_FREE: false, LOCTO_FREE: true },
-    //   { id: "3", title: "Marker 3", lat: 37.6615, lng: 127.0604, VEGAN: true, HALAL: true, GLUTEN_FREE: false, LOCTO_FREE: false },
-    //   { id: "4", title: "Marker 4", lat: 37.6468, lng: 127.0473, VEGAN: false, HALAL: false, GLUTEN_FREE: true, LOCTO_FREE: true },
-    //   { id: "5", title: "강아지빵", lat: 37.6501, lng: 127.0647, VEGAN: true, HALAL: false, GLUTEN_FREE: true, LOCTO_FREE: false },
-    //   { id: "6", title: "잘빠진 메밀", lat: 37.625876, lng: 127.0787062, VEGAN: true, HALAL: true, GLUTEN_FREE: false, LOCTO_FREE: true }
-    // ];
-
-
     const zoom = mapOptions.zoom;
     const windowWidth = window.innerWidth;
     const MarkerData = RestaurantData.data;
@@ -105,7 +93,7 @@ const MapNaverCur = () => {
     // 서버에서 받아온 데이터로 마커 추가
     addMarkers(naver, map, MarkerData, windowWidth, zoom);
   }, [myLocation, naver, RestaurantData]);
-
+ 
     // 마커 추가
   //   addMarkers(naver, map, totalDataArray, windowWidth, zoom);
   // }, [myLocation, naver]);

@@ -101,7 +101,7 @@ export const addMarker = (naver, map, markerObj, windowWidth, zoom) => {
 export const addMarkers = (naver, map, MarkerData, windowWidth, zoom) => {
   if (!Array.isArray(MarkerData)) {
     console.error('MarkerData is not an array:', MarkerData);
-    return;
+    return; 
   }
 
   for (let i = 0; i < MarkerData.length; i++) {
