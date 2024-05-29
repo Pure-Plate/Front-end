@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
+  // BrowserRouter as Router,
+  // Route,
+  // Switch,
   useNavigate,
 } from "react-router-dom";
 import { addMarkers } from "./Marker/Marker.jsx"; // markers.js 파일에서 함수 import
@@ -16,7 +16,7 @@ const MapNaverCur = () => {
   const [myLocation, setMyLocation] = useState({ latitude: 0, longitude: 0 });
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [RestaurantData, setRestaurantData] = useState([]);
-  const { URL, bookmarks, bookmarksToggle, SetBookmarksToggle } = useAuth();
+  const { URL, bookmarks, bookmarksToggle } = useAuth();
   const navigate = useNavigate();
 
   // Update viewport size

@@ -7,7 +7,6 @@ import Profile from "../Profile.jsx";
 import { Link, useParams, useNavigate, Outlet } from "react-router-dom";
 import Restaurant from "../Restaurant/Restaurant.jsx";
 import logo_icon from "../assets/Icons/logo_icon.png";
-import axios from "axios";
 import { useAuth } from "../AuthContext.jsx";
 
 function Pureplate() {
@@ -15,8 +14,7 @@ function Pureplate() {
   const [isRestModalOpen, setIsRestModalOpen] = useState(false);
   const navigate = useNavigate();
   const restModalRef = useRef();
-  const { isLoggedIn, bookmarks, user, bookmarksToggle, SetBookmarksToggle } =
-    useAuth();
+  const { isLoggedIn, bookmarksToggle, SetBookmarksToggle } = useAuth();
 
   const bookmarkToggle = () => {
     SetBookmarksToggle(!bookmarksToggle);

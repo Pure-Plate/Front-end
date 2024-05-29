@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import CustomWindow from "./CustomInfoWindow.jsx";
 
 export const createInfoWindow = (naver, map, marker, name, Id, navigate) => {
@@ -17,9 +16,9 @@ export const createInfoWindow = (naver, map, marker, name, Id, navigate) => {
   });
 
   // 마커에 mouseover 이벤트 리스너 추가
-  // naver.maps.Event.addListener(marker, "mouseover", function(e) {
-  //   infowindow.open(map, marker);
-  // });
+  naver.maps.Event.addListener(marker, "mouseover", function (e) {
+    infowindow.open(map, marker);
+  });
 
   // 마커에 mouseout 이벤트 리스너 추가
   naver.maps.Event.addListener(marker, "mouseout", function (e) {
@@ -34,8 +33,8 @@ export const createInfoWindow = (naver, map, marker, name, Id, navigate) => {
   //   }
 
   naver.maps.Event.addListener(marker, "click", function (e) {
-    infowindow.open(map, marker);
-    console.log(Id);
+    // infowindow.open(map, marker);
+    // console.log(Id);
     navigate(`/${Id}`);
   });
 
