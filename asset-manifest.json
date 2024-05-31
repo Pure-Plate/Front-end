@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/pureplate_test/static/css/main.5f10305c.css",
+    "main.js": "/pureplate_test/static/js/main.9877127f.js",
+    "static/js/453.b9a8f572.chunk.js": "/pureplate_test/static/js/453.b9a8f572.chunk.js",
+    "static/media/memil.svg": "/pureplate_test/static/media/memil.516f187c14225cfcc0a5a048a554ccec.svg",
+    "static/media/bookmarkGray.svg": "/pureplate_test/static/media/bookmarkGray.f054ce04a22286cc60b9b0af2cc59f0c.svg",
+    "static/media/bookmarkYellow.svg": "/pureplate_test/static/media/bookmarkYellow.3dd923ea1475e96c3093e9ce77d1a320.svg",
+    "static/media/star0.svg": "/pureplate_test/static/media/star0.226678892c7f43814d3dae0d370cf990.svg",
+    "index.html": "/pureplate_test/index.html",
+    "static/media/icon-phone-telephone0.svg": "/pureplate_test/static/media/icon-phone-telephone0.c164410d83c0df719f27eab082d636ca.svg",
+    "static/media/div4.svg": "/pureplate_test/static/media/div4.5461576a26110dba1e8c9d44ddef7c60.svg",
+    "static/media/Star1.svg": "/pureplate_test/static/media/Star1.aa246b68e5422d4fb553dc09822fa2ba.svg",
+    "main.5f10305c.css.map": "/pureplate_test/static/css/main.5f10305c.css.map",
+    "main.9877127f.js.map": "/pureplate_test/static/js/main.9877127f.js.map",
+    "453.b9a8f572.chunk.js.map": "/pureplate_test/static/js/453.b9a8f572.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5f10305c.css",
+    "static/js/main.9877127f.js"
+  ]
+}
