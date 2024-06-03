@@ -1,167 +1,61 @@
-import { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styles from "./SearchBar.module.css";
-import axios from "axios";
-import { useAuth } from "../AuthContext.jsx";
 import findIcon from "../assets/Icons/searchIcon.svg";
-import historySearchIcon from "../assets/Icons/historySearchIcon.svg";
-import { useNavigate } from "react-router-dom";
+import Dropdown from "./Dropdown";
+import useSearchRestaurants from "./useSearchRestaurants";
 
 function SearchBar() {
-  // State to store restaurant data
-  const [restaurants, setRestaurants] = useState([]);
-  const [restaurantsSet, setRestaurantsSet] = useState();
-  const [query, setQuery] = useState("");
-  const [isHaveQuery, setIsHaveQuery] = useState(false);
-  const [dropDownList, setDropDownList] = useState(restaurants);
-  const [dropDownItemIndex, setDropDownItemIndex] = useState(-1);
-  const { URL, setRestaurantNameList, restaurantNameList } = useAuth();
-  const navigate = useNavigate();
+  const {
+    query,
+    onChange,
+    onSubmit,
+    isHaveQuery,
+    dropDownList,
+    dropDownItemIndex,
+    handleDropDownKey,
+    clickDropDownItem,
+  } = useSearchRestaurants();
 
-  // Fetch restaurant data from the API
-  const fetchRestaurant = async () => {
-    try {
-      const response = await axios.get(`${URL}/api/restaurant/list`);
+  const searchFormRef = useRef(null);
+  const [dropdownWidth, setDropdownWidth] = useState("100%");
 
-      const restaurantNames = response.data.data.map((element) => element.Name);
-      const restaurantSet = response.data.data.reduce((acc, element) => {
-        acc[element.Name] = element.Id;
-        return acc;
-      }, {});
-      setRestaurantsSet(restaurantSet);
-      setRestaurants(restaurantNames);
-      setRestaurantNameList(restaurantNames);
-    } catch (error) {
-      if (error.response) {
-        // The server responded with a status code outside the 2xx range
-        console.error(
-          "Server response error:",
-          error.response.status,
-          error.response.data
-        );
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.error(
-          "No response from server. This could be a network issue.",
-          error.request
-        );
-      } else {
-        // An error occurred in setting up the request
-        console.error("Error in setting up request:", error.message);
-      }
-    }
-  };
+  //Dynamically allocate width to Dropbox 
   useEffect(() => {
-    console.log(restaurantNameList);
-  }, [restaurantNameList]);
-
-  useEffect(() => {
-    fetchRestaurant();
-  }, []);
-
-  // Handle form submission
-  const onSubmit = (event) => {
-    event.preventDefault();
-    const link = restaurantsSet[query.trim()];
-    if (link) {
-      navigate(`/${link}`);
-      setQuery("");
+    if (searchFormRef.current) {
+      setDropdownWidth(`${searchFormRef.current.offsetWidth}px`);
     }
-  };
-
-  // Handle input change
-  const onChange = (event) => {
-    setQuery(event.target.value);
-    setIsHaveQuery(true);
-  };
-
-  // Update dropdown list based on query
-  const showDropDownList = () => {
-    if (query === "") {
-      setIsHaveQuery(false);
-      setDropDownList([]);
-    } else {
-      const lowerCaseQuery = query.toLowerCase();
-      const choosenTextList = restaurants.filter((textItem) =>
-        textItem.toLowerCase().includes(lowerCaseQuery)
-      );
-      setDropDownList(choosenTextList);
-    }
-  };
-
-  // Handle click on dropdown item
-  const clickDropDownItem = (clickedItem) => {
-    setQuery(clickedItem);
-    setIsHaveQuery(false);
-  };
-
-  // Handle keyboard navigation in dropdown
-  const handleDropDownKey = (event) => {
-    if (
-      event.key === "ArrowDown" &&
-      dropDownList.length - 1 > dropDownItemIndex
-    ) {
-      setDropDownItemIndex(dropDownItemIndex + 1);
-    }
-
-    if (event.key === "ArrowUp" && dropDownItemIndex >= 0) {
-      setDropDownItemIndex(dropDownItemIndex - 1);
-    }
-
-    if (event.key === "Enter") {
-      event.preventDefault();
-      if (dropDownItemIndex >= 0) {
-        clickDropDownItem(dropDownList[dropDownItemIndex]);
-      } else if (restaurantsSet[query.trim()]) {
-        onSubmit(event); // Trigger form submission if the query is valid
-      } else {
-      }
-      setDropDownItemIndex(-1);
-    }
-  };
-
-  useEffect(showDropDownList, [query]);
+  }, [query]);
 
   return (
     <div className={styles.searchBar}>
-      <form className={styles.searchForm} onSubmit={onSubmit}>
-        <input
-          className={styles.searchInput}
-          type="text"
-          name="search"
-          id="searchInput"
-          placeholder="Search"
-          onChange={onChange}
-          onKeyUp={handleDropDownKey}
-          value={query}
-          autoComplete="off"
-        />
+      <div className={styles.searchLayer}>
+        <form
+          className={styles.searchForm}
+          onSubmit={onSubmit}
+          ref={searchFormRef}
+        >
+          <input
+            className={`${styles.searchInput} ${query ? styles.hasValue : ""}`}
+            type="text"
+            name="search"
+            id="searchInput"
+            placeholder="Search"
+            onChange={onChange}
+            onKeyUp={handleDropDownKey}
+            value={query}
+            autoComplete="off"
+          />
+        </form>
         {isHaveQuery && (
-          <ul className={styles.dropDownBox}>
-            {dropDownList.length === 0 && (
-              <li className={styles.dropDownItem}>No matching words found</li>
-            )}
-            {dropDownList.map((dropDownItem, dropDownIndex) => (
-              <li
-                key={dropDownIndex}
-                onClick={() => clickDropDownItem(dropDownItem)}
-                onMouseOver={() => setDropDownItemIndex(dropDownIndex)}
-                className={`${styles.dropDownItem} ${
-                  dropDownItemIndex === dropDownIndex ? styles.selected : ""
-                }`}
-              >
-                <img
-                  className={styles.union}
-                  src={historySearchIcon}
-                  alt="search"
-                />
-                <div className={styles.searchHistory}>
-                  <span className={styles.recentSearch12}>{dropDownItem}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <Dropdown
+            dropDownList={dropDownList}
+            dropDownItemIndex={dropDownItemIndex}
+            clickDropDownItem={clickDropDownItem}
+            setDropDownItemIndex={() => {}}
+            dropdownWidth={dropdownWidth}
+          />
         )}
-      </form>
+      </div>
       <button className={styles.searchButton} onClick={onSubmit}>
         <img className={styles.searchIcon} src={findIcon} alt="Search" />
       </button>
