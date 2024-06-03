@@ -70,5 +70,6 @@
   .inputFrame {
     width: 14rem; /* 224px */
     height: 3rem; /* 48px */
+    margin-bottom: 23px;
   }
 }

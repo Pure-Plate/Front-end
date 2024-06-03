@@ -1,37 +1,15 @@
 import { useAuth } from "../AuthContext";
 import styles from "./Button.module.css";
-import halalIcon from "../assets/Icons/flag_halal.svg";
-import veganIcon from "../assets/Icons/flag_vegan.svg";
-import glutenIcon from "../assets/Icons/flag_glutenfree.svg";
-import lactoIcon from "../assets/Icons/flag_loctosfree.svg";
-
-import halalIcon1 from "../assets/Icons/flag_halal1.svg";
-import veganIcon1 from "../assets/Icons/flag_vegan1.svg";
-import glutenIcon1 from "../assets/Icons/flag_glutenfree1.svg";
-import lactoIcon1 from "../assets/Icons/flag_loctosfree1.svg";
+import { cssList, icons } from "./iconConfig"; // 분리된 설정 파일 임포트
 import { useEffect, useState } from "react";
 
 function Button({ attribute }) {
-  const [cssList, setCssList] = useState({
-    Vegan: "rgba(118, 199, 183, 0.85)",
-    Halal: "rgba(118, 199, 131, 0.85)",
-    "Gluten-Free": "rgba(233, 250, 234, 0.9)",
-    "Lacto-Free": "rgba(254, 246, 176, 0.85) ",
-  });
-
-  const [list, setList] = useState({
-    Vegan: veganIcon,
-    Halal: halalIcon,
-    "Gluten-Free": glutenIcon,
-    "Lacto-Free": lactoIcon,
-  });
-    
-  // Icons for different states (default and active)
-  const [icons, setIcons] = useState({
-    Vegan: { default: veganIcon1, active: veganIcon },
-    Halal: { default: halalIcon1, active: halalIcon },
-    "Gluten-Free": { default: glutenIcon1, active: glutenIcon },
-    "Lacto-Free": { default: lactoIcon1, active: lactoIcon },
+  const [list, setList] = useState(() => {
+    const initialList = {};
+    Object.keys(icons).forEach((key) => {
+      initialList[key] = icons[key].default;
+    });
+    return initialList;
   });
 
   const { dietToggle, setDietToggle } = useAuth(); 
@@ -102,4 +80,4 @@ function Button({ attribute }) {
   );
 }
 
-export default Button; 
+export default Button;

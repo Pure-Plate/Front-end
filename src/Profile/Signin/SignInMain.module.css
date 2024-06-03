@@ -94,7 +94,6 @@
 
 @media (max-width: 480px) {
   .signInFrame {
-    width: 20rem; /* 300px */
-    min-height: 21.875rem; /* 350px */
+    width: 21em;
   }
 }

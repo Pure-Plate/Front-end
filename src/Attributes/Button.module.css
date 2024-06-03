@@ -4,31 +4,31 @@
 
 /* Default (not selected) */
 .selectedFalse {
-  border-color: #a6b9b1c5;
+  border-color: #a6b9b100;
+  background-color: #a4e6c684;
 }
 
 .distance {
   color: #3e4958;
   text-align: center;
   font-family: "AnekBangla-Light", sans-serif;
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 300;
   position: relative;
 
-  border-radius: 1.875rem;
+  border-radius: 1.575rem;
   border-style: solid;
   border-width: 0.03125rem;
   padding: 0.625rem 1rem 0.625rem 1rem;
   display: flex;
   flex-direction: row;
-  gap: 0.625rem;
   align-items: center;
   justify-content: center;
   height: 2.875rem;
   position: relative;
   cursor: pointer;
 }
+
 /* 1050px 이하의 화면 크기에서 스타일 적용 */
 @media (max-width: 1050px) {
   .distance {
