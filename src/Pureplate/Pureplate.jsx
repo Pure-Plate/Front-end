@@ -15,7 +15,7 @@ function Pureplate() {
   const bookmarkToggle = () => {
     SetBookmarksToggle(!bookmarksToggle);
   };
-
+ 
   useEffect(() => {
     if (id) {
       setIsRestModalOpen(true);
