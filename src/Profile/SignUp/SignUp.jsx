@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SignInInputField from "../SignIn/SignInInputField/SignInInputField.jsx";
+import SignInInputField from "../Signin/SignInInputField/SignInInputField.jsx";
 import { useAuth } from "../../AuthContext.jsx";
 import styles from "./SignUp.module.css";
 import axios from "axios";
