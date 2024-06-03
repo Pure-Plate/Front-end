@@ -5,6 +5,8 @@ import { useAuth } from "../../AuthContext.jsx";
 import styles from "./Signin.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import "../../custom-swal.css";
 
 function SignUp({ switchToSignIn, close }) {
   const [name, setName] = useState("");
@@ -63,6 +65,22 @@ function SignUp({ switchToSignIn, close }) {
     return Object.values(tempErrors).every((x) => x === "");
   };
 
+  const showSuccessAlert = (username) => {
+    Swal.fire({
+      title: `Welcome to Pureplate, ${username}!`, // Alert title
+      text: "Please, sign in!", // Alert contents
+      icon: "success", // Alert type (success, error, warning, info, question)
+    });
+  };
+
+  const showErrorAlert = () => {
+    Swal.fire({
+      title: `This email is already registered.`, // Alert title
+      text: " Please choose another email.", // Alert contents
+      icon: "error", // Alert type (success, error, warning, info, question)
+    });
+  };
+
   const onSubmit = async (event) => {
     event.preventDefault();
     if (validate()) {
@@ -81,10 +99,13 @@ function SignUp({ switchToSignIn, close }) {
         // 예: 로그인 페이지로 리다이렉트하기, 성공 메시지 표시하기 등
         close();
         navigate("/");
-        alert(
-          `Welcome to Pureplate, ${response.data.nickname}!\nPlease, sign in!`
-        );
+        showSuccessAlert(response.data.nickname, "success");
       } catch (error) {
+        const firstKey = Object.keys(error.response.data)[0];
+        console.log(firstKey);
+        if (firstKey === "username") {
+          showErrorAlert();
+        }
         console.error(
           "Error during sign up:",
           error.response ? error.response.data : error

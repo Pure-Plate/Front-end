@@ -3,7 +3,7 @@ name: Deploy Frontend to EC2 (main)
 on:
   push:
     branches:
-      - main
+      - ModifyStyle
 
 jobs:
   deploy:

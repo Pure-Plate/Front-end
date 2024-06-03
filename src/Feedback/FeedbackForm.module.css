@@ -72,7 +72,7 @@ html {
   border: 0.0625rem solid #ccc;
   border-radius: 0.25rem;
   font-size: 0.875rem;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   resize: none;
 }
 
@@ -115,7 +115,7 @@ html {
   border: 0.0625rem solid transparent;
   font-size: 0.875rem;
   font-weight: 400;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   transition: background-color 0.3s ease;
 }
 
@@ -124,6 +124,7 @@ html {
 }
 
 .modalWrapper {
+  z-index: 10;
   position: absolute;
   top: 0;
   left: 0;
@@ -165,4 +166,13 @@ html {
   .button {
     font-size: 0.875rem;
   }
+}
+.invalidInput {
+  border: 2px solid red;
+}
+
+.errorText {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 0.25em;
 }

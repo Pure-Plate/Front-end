@@ -2,11 +2,11 @@ import { ChevronDown } from "../ChevronDown/ChevronDown.jsx";
 import { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
-
 import Sign from "./Signin/Sign.jsx";
 import LogoutConfirmModal from "./Logout/LogoutConfirmModal.jsx";
 import styles from "./Profile.module.css";
 import profileIcon from "../assets/Icons/profile.svg";
+import Swal from "sweetalert2";
 
 function Profile() {
   const { isLoggedIn, login, logout, user } = useAuth();
@@ -44,8 +44,16 @@ function Profile() {
     setIsLogoutConfirmOpen(false);
   };
 
+  const showAlert = () => {
+    Swal.fire({
+      title: "You have successfully logged out!", // Alert title
+      text: `Goodbye!!`, // Alert contents
+      icon: "success", // Alert type (success, error, warning, info, question)
+    });
+  };
   const handleLogout = () => {
     logout();
+    showAlert();
     setIsLogoutConfirmOpen(false);
     navigate("/");
   };
@@ -68,7 +76,9 @@ function Profile() {
           ) : (
             <>
               <div className={styles.jiwoo}>{user}</div>
-              <ChevronDown className={styles.chevronDownInstance2}></ChevronDown>
+              <ChevronDown
+                className={styles.chevronDownInstance2}
+              ></ChevronDown>
             </>
           )}
         </button>
@@ -82,21 +92,18 @@ function Profile() {
           >
             <ul>
               <li className={styles.dropProfile}>LCH</li>
-              <Link to="/Feedback">
+              <Link to="/Feedback" style={{ color: "black" }}>
                 <li
                   onClick={() => {
                     console.log(user);
                     setDropdownOpen(false);
                   }}
+                  style={{ color: "black" }}
                 >
                   Feedback
                 </li>
               </Link>
-              <li
-                onClick={openLogoutConfirm}
-              >
-                Logout
-              </li>
+              <li onClick={openLogoutConfirm}>Logout</li>
             </ul>
           </div>
         )}

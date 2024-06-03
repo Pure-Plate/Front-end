@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Bookmark.module.css";
-import bookmarkUnselected from "../assets/Icons/Bookmark/bookmarkGray.svg";
-import bookmarkSelected from "../assets/Icons/Bookmark/bookmarkYellow.svg";
+import bookmarkUnselected from "../assets/Icons/Bookmark/Star1.svg";
+import bookmarkSelected from "../assets/Icons/Bookmark/Star2.svg";
 import { useAuth } from "../AuthContext.jsx";
 
 function BookmarkIcon({ isRestModalOpen, bookmarkToggle }) {

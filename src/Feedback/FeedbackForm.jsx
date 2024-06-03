@@ -14,11 +14,15 @@ function FeedbackForm({ closeModal }) {
     lacto_free: false,
   });
   const [additionalComments, setAdditionalComments] = useState("");
-  const { URL } = useAuth();
+  // New state for validation
+  const [isValidRestaurant, setIsValidRestaurant] = useState(true);
+  const { URL, restaurantNameList } = useAuth();
 
   // Handler for restaurant name input
   const handleNameChange = (e) => {
-    setRestaurantName(e.target.value);
+    const value = e.target.value;
+    setRestaurantName(value);
+    setIsValidRestaurant(restaurantNameList.includes(value)); // Check if the name is valid
   };
 
   // Handler for menu options checkboxes
@@ -38,6 +42,10 @@ function FeedbackForm({ closeModal }) {
   // Handler for form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!isValidRestaurant) {
+      alert("Please enter a valid restaurant name.");
+      return;
+    }
     const data = {
       restaurant_name: restaurantName,
       vegan: menuOptions.vegan,
@@ -68,7 +76,8 @@ function FeedbackForm({ closeModal }) {
       closeModal();
     } catch (error) {
       console.error(error.response ? error.response.data : error);
-      alert("Wrong Restaurant Name");
+      // alert("Wrong Restaurant Name");
+      alert("Submission failed.");
     }
   };
 
@@ -85,8 +94,14 @@ function FeedbackForm({ closeModal }) {
           name="restaurantName"
           value={restaurantName}
           onChange={handleNameChange}
-          className={styles.input}
+          // className={styles.input}
+          className={`${styles.input} ${
+            !isValidRestaurant ? styles.invalidInput : ""
+          }`} // Apply invalidInput style if not valid
         />
+        {!isValidRestaurant && (
+          <div className={styles.errorText}>Invalid restaurant name</div>
+        )}
       </div>
       <div className={styles.checkboxContainer}>
         <label htmlFor="menuOptions" className={styles.formLabel}>

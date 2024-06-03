@@ -1,0 +1,7 @@
+.swal2-title {
+  font-family: "AnekBangla-Light", sans-serif; /* 제목 폰트 변경 */
+}
+
+.swal2-html-container {
+  font-family: "AnekBangla-Light", sans-serif; /* 내용 폰트 변경 */
+}

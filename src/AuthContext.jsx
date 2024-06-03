@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { createContext, useContext, useState, useEffect } from "react";
-
+import Swal from "sweetalert2";
+import "./custom-swal.css";
 // Create an AuthContext
 const AuthContext = createContext();
 
@@ -25,6 +26,8 @@ function AuthProvider({ children }) {
     "Lacto-Free": false,
   });
 
+  const [restaurantNameList, setRestaurantNameList] = useState([]);
+
   // Effect to log dietToggle state changes
   useEffect(() => {
     console.log(dietToggle);
@@ -48,10 +51,21 @@ function AuthProvider({ children }) {
     }
   }, []);
 
-  // Function to show a custom alert message
-  function showCustomAlert(message) {
-    window.alert(`localhost says: ${message}`);
-  }
+  const showSuccessAlert = (username) => {
+    Swal.fire({
+      title: "You have successfully logged in!", // Alert title
+      text: `Hello, ${username}!!`, // Alert contents
+      icon: "success", // Alert type (success, error, warning, info, question)
+    });
+  };
+
+  const showFailAlert = () => {
+    Swal.fire({
+      title: "Login unsuccessful.", // Alert title
+      text: "Please verify your email and password and try again.", // Alert contents
+      icon: "error", // Alert type (success, error, warning, info, question)
+    });
+  };
 
   // Login function
   const login = async (username, password) => {
@@ -65,14 +79,15 @@ function AuthProvider({ children }) {
       setUserToken(response.data.token);
       sessionStorage.setItem("user", response.data.nickname);
       sessionStorage.setItem("token", response.data.token);
-      showCustomAlert("Logged in!");
+      showSuccessAlert(response.data.nickname);
 
       await bookmarkGet(response.data.token);
     } catch (error) {
       if (error.response) {
-        console.error("Login failed:", error.response.data); // Translate the Korean comment
+        console.error("Login failed:", error.response.data);
+        showFailAlert();
       } else {
-        console.error("An error occurred during the request.", error.message); // Translate the Korean comment
+        console.error("An error occurred during the request.", error.message);
       }
       setIsLoggedIn(false);
     }
@@ -124,7 +139,10 @@ function AuthProvider({ children }) {
         );
       } else {
         // When an error occurs in setting up the request
-        console.error("An error occurred while setting up the request:", error.message);
+        console.error(
+          "An error occurred while setting up the request:",
+          error.message
+        );
       }
     }
   };
@@ -148,6 +166,8 @@ function AuthProvider({ children }) {
         URL,
         dietToggle,
         setDietToggle,
+        restaurantNameList,
+        setRestaurantNameList,
       }}
     >
       {children}
