@@ -19,6 +19,7 @@ function SearchBar() {
   const searchFormRef = useRef(null);
   const [dropdownWidth, setDropdownWidth] = useState("100%");
 
+  //Dynamically allocate width to Dropbox 
   useEffect(() => {
     if (searchFormRef.current) {
       setDropdownWidth(`${searchFormRef.current.offsetWidth}px`);
@@ -28,7 +29,11 @@ function SearchBar() {
   return (
     <div className={styles.searchBar}>
       <div className={styles.searchLayer}>
-        <form className={styles.searchForm} onSubmit={onSubmit} ref={searchFormRef}>
+        <form
+          className={styles.searchForm}
+          onSubmit={onSubmit}
+          ref={searchFormRef}
+        >
           <input
             className={`${styles.searchInput} ${query ? styles.hasValue : ""}`}
             type="text"

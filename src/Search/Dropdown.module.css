@@ -19,13 +19,14 @@
   }
   
   .dropDownItem {
-    padding-top: 1rem;
+    padding: 0.4rem;
     width: 100%;
     z-index: 4;
     letter-spacing: 2px;
     display: flex;
     align-items: center;
     padding-left: 10px;
+    color: #616060;
     font-family: 'NanumGothic' sans-serif;
   }
   
