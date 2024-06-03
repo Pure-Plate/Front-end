@@ -2,7 +2,7 @@ import { ChevronDown } from "../ChevronDown/ChevronDown.jsx";
 import { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import SignInMain from "./SignIn/SignInMain.jsx";
+import SignInMain from "./Signin/SignInMain.jsx";
 import LogoutConfirmModal from "./Logout/LogoutConfirmModal.jsx";
 import styles from "./Profile.module.css";
 import profileIcon from "../assets/Icons/profile.svg";

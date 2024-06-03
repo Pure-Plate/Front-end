@@ -29,7 +29,6 @@ jobs:
       - name: Install dependencies and build
         run: |
           npm install
-          npm update
           npm run build
         env:
           CI: ""
