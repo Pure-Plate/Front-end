@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import SignInInputField from "../SignIn/SignInInputField.jsx";
-import SignInButton from "../SignIn/SignInButton.jsx";
+import SignInInputField from "../SignIn/SignInInputField/SignInInputField.jsx";
 import { useAuth } from "../../AuthContext.jsx";
 import styles from "./SignUp.module.css";
 import axios from "axios";
@@ -50,7 +49,12 @@ function SignUp({ switchToSignIn, close }) {
   };
 
   const validate = () => {
-    const tempErrors = validateAllFields(name, email, password, confirmPassword);
+    const tempErrors = validateAllFields(
+      name,
+      email,
+      password,
+      confirmPassword
+    );
     setErrors(tempErrors);
     return Object.values(tempErrors).every((x) => x === "");
   };
@@ -74,7 +78,10 @@ function SignUp({ switchToSignIn, close }) {
         if (error.response && error.response.data.username) {
           showErrorAlert();
         }
-        console.error("Error during sign up:", error.response ? error.response.data : error);
+        console.error(
+          "Error during sign up:",
+          error.response ? error.response.data : error
+        );
       }
     } else {
       console.error("Validation failed.");
@@ -82,7 +89,7 @@ function SignUp({ switchToSignIn, close }) {
   };
 
   return (
-    <form className={styles.SignUP} onSubmit={onSubmit}>
+    <form className={styles.SignUpMain} onSubmit={onSubmit}>
       <SignInInputField
         label="Name"
         value={name}
@@ -110,7 +117,9 @@ function SignUp({ switchToSignIn, close }) {
         onChange={handleConfirmPasswordChange}
         errorMessage={errors.confirmPassword}
       />
-      <SignInButton onSubmit={onSubmit} label="Submit" />
+      <button className={styles.signInButton} onClick={onSubmit}>
+        Submit
+      </button>
     </form>
   );
 }

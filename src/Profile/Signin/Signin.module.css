@@ -2,78 +2,28 @@
 .SignInInputField {
   display: flex;
   flex-direction: column;
-  gap: 1.0625rem;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  /* height: 13.25rem; */
   position: relative;
-}
-
-.signInTextBox {
-  flex-shrink: 0;
-  width: 20rem;
-  height: 4.375rem;
-  position: relative;
-}
-
-.signInTextBox:focus {
-  border: none;
-}
-
-.frame31 {
-  width: 20rem;
-  height: 2.5rem;
-  position: absolute;
-  left: 0;
-  top: 1.875rem;
-  background: #e9e9e9;
-  border-radius: 0.625rem;
-  display: flex;
-}
-
-.placeholder {
-  color: #979797;
-  text-align: left;
-  font-family: "Alef-Regular", sans-serif;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  position: absolute;
-  padding-left: 0.875rem;
-  /* left: 0.875rem; */
-  /* top: calc(50% - 0.625rem); */
-  height: 100%;
-  width: 100%;
-}
-
-.placeholder {
-  outline: rgba(54, 54, 54, 0.649);
-}
-
-.nameLabel {
-  color: #000000;
-  text-align: left;
-  font-family: "Alef-Bold", sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  position: absolute;
-  left: 0;
-  top: 0;
 }
 
 .signInButton {
-  margin: -0.1875rem 0 0 0;
-  background: var(--button-color, rgba(169, 234, 195, 0.62));
+  background: rgba(169, 234, 195, 0.62);
   border-radius: 0.625rem;
   display: flex;
-  flex-direction: row;
-  gap: 0.625rem;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   width: 8.75rem;
-  height: 2.375rem;
-  position: relative;
+  height: 2.5rem;
+  margin-top: 1rem;
+
+  color: rgba(0, 0, 0, 0.46);
+  text-align: left;
+  font-family: "Alef-Regular", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
 }
 
 .signIn2 {
@@ -174,61 +124,6 @@ input::placeholder {
   border-style: none;
 }
 
-.socialBox {
-  margin-bottom: 30px;
-}
-
-.kakao {
-  background-color: #feec34;
-  border-color: #feec34;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-  border-radius: 3px;
-}
-
-.kakaoLogo {
-  width: 24px;
-  height: 25px;
-}
-
-.kakaoText {
-  width: 300px;
-  font-size: 15px;
-  text-align: center;
-  display: inline-block;
-  box-sizing: border-box;
-}
-
-.facebook {
-  background-color: #21538a;
-  border-color: #21538a;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-  color: #fff;
-  border-radius: 3px;
-}
-
-.facebookText {
-  padding-top: 12px;
-  width: 310px;
-  color: #fff;
-  font-size: 15px;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.facebookLogo {
-  padding-top: 7px;
-  width: 24px;
-  height: 25px;
-}
-
 .loginEnd {
   text-align: center;
   font-size: 11px;
@@ -249,96 +144,27 @@ input::placeholder {
 .noUser {
   text-decoration: underline;
 }
-/* error */
-.errorInput {
-  border: 1px solid red; /* 오류 경고를 위한 테두리 색상 변경 */
-}
 
+.signInButton {
+  margin: -0.1 875rem 0 0 0;
+  background: var(--button-color, rgba(169, 234, 195, 0.62));
+  border-radius: 0.625rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.625rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 8.75rem;
+  height: 2.375rem;
+  position: relative;
+  cursor: pointer;
+  margin-top: 0.8rem;
+  margin-bottom: 10px;
 
-@media (max-width: 768px) {
-  .signIn {
-    width: 90%;
-    padding: 10px;
-    gap: 1.5rem;
-  }
-  .signInMain {
-    font-size: 1.5rem;
-  }
-  .signInTextBox,
-  .frame31 {
-    width: 100%;
-  }
-  .signInButton {
-    width: 100%;
-  }
-  .signUpText,
-  .signUp {
-    font-size: 0.9rem;
-  }
-  .loginModal {
-    width: 80%;
-    height: auto;
-    padding: 15px;
-    margin: 30px auto;
-  }
-}
-
-/* 화면 너비가 480px 이하일 때 적용 */
-@media (max-width: 480px) {
-  .signIn {
-    width: 100%;
-    padding: 5px;
-    gap: 1rem;
-  }
-  .signInMain {
-    font-size: 1.2rem;
-  }
-  .signInTextBox,
-  .frame31 {
-    width: 100%;
-  }
-  .signInButton {
-    width: 100%;
-    height: 2rem;
-  }
-  .signUpText,
-  .signUp {
-    font-size: 0.8rem;
-  }
-  .loginModal {
-    width: 90%;
-    height: auto;
-    padding: 10px;
-    margin: 20px auto;
-  }
-}
-
-/* 화면 너비가 360px 이하일 때 적용 */
-@media (max-width: 360px) {
-  .signIn {
-    width: 100%;
-    padding: 5px;
-    gap: 0.8rem;
-  }
-  .signInMain {
-    font-size: 1rem;
-  }
-  .signInTextBox,
-  .frame31 {
-    width: 100%;
-  }
-  .signInButton {
-    width: 100%;
-    height: 1.8rem;
-  }
-  .signUpText,
-  .signUp {
-    font-size: 0.7rem;
-  }
-  .loginModal {
-    width: 95%;
-    height: auto;
-    padding: 5px;
-    margin: 10px auto;
-  }
+  color: rgba(0, 0, 0, 0.46);
+  text-align: left;
+  font-family: "Alef-Regular", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
 }

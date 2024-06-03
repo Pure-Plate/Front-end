@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import SignInInputField from "./SignInInputField.jsx";
-import SignInButton from "./SignInButton.jsx";
+import SignInInputField from "./SignInInputField/SignInInputField.jsx";
 import { useAuth } from "../../AuthContext.jsx";
 import styles from "./Signin.module.css";
 
@@ -26,9 +25,7 @@ function SignIn() {
     if (validate()) {
       try {
         await login(email, password);
-        // 성공적으로 로그인이 되면, 필요하다면 여기서 추가적인 작업을 수행합니다.
       } catch (error) {
-        // 로그인 실패 시, 오류 메시지를 처리합니다.
         setErrors({
           ...errors,
           form: "Login failed. Please check your email or password.",
@@ -40,20 +37,25 @@ function SignIn() {
   };
 
   return (
-    <div className={styles.signInArea}>
-      <SignInForm
-        email={email}
-        password={password}
-        errors={errors}
-        onIdChange={handleIdChange}
-        onPasswordChange={handlePasswordChange}
-        onSubmit={onSubmit}
-      />
-    </div>
+    <SignInForm
+      email={email}
+      password={password}
+      errors={errors}
+      onIdChange={handleIdChange}
+      onPasswordChange={handlePasswordChange}
+      onSubmit={onSubmit}
+    />
   );
 }
 
-const SignInForm = ({ email, password, errors, onIdChange, onPasswordChange, onSubmit }) => (
+const SignInForm = ({
+  email,
+  password,
+  errors,
+  onIdChange,
+  onPasswordChange,
+  onSubmit,
+}) => (
   <form className={styles.SignInInputField} onSubmit={onSubmit}>
     <SignInInputField
       label="Email"
@@ -69,7 +71,9 @@ const SignInForm = ({ email, password, errors, onIdChange, onPasswordChange, onS
       errorMessage={errors.password}
     />
     {errors.form && <div className={styles.error}>{errors.form}</div>}
-    <SignInButton onSubmit={onSubmit} label="Sign In" />
+    <button className={styles.signInButton} onClick={onSubmit}>
+      Submit
+    </button>
   </form>
 );
 

@@ -72,7 +72,7 @@ function Profile() {
           onClick={isLoggedIn ? toggleDropdown : openModal}
         >
           {!isLoggedIn ? (
-            <span style={{ width: "100%" }}>Sign In</span>
+            <span>Sign In</span>
           ) : (
             <>
               <div className={styles.jiwoo}>{user}</div>
