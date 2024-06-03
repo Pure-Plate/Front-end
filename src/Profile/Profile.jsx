@@ -2,7 +2,7 @@ import { ChevronDown } from "../ChevronDown/ChevronDown.jsx";
 import { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import Sign from "./Signin/Sign.jsx";
+import SignInMain from "./SignIn/SignInMain.jsx";
 import LogoutConfirmModal from "./Logout/LogoutConfirmModal.jsx";
 import styles from "./Profile.module.css";
 import profileIcon from "../assets/Icons/profile.svg";
@@ -107,7 +107,7 @@ function Profile() {
             </ul>
           </div>
         )}
-        <Sign isOpen={isModalOpen} close={closeModal} />
+        <SignInMain isOpen={isModalOpen} close={closeModal} />
         <LogoutConfirmModal
           isOpen={isLogoutConfirmOpen}
           onClose={closeLogoutConfirm}

@@ -41,24 +41,36 @@ function SignIn() {
 
   return (
     <div className={styles.signInArea}>
-      <form className={styles.frame33} onSubmit={onSubmit}>
-        <SignInInputField
-          label="Email"
-          value={email}
-          onChange={handleIdChange}
-          errorMessage={errors.email}
-        />
-        <SignInInputField
-          label="Password"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-          errorMessage={errors.password}
-        />
-        {errors.form && <div className={styles.error}>{errors.form}</div>}
-        <SignInButton onSubmit={onSubmit} label="Sign In" />
-      </form>
+      <SignInForm
+        email={email}
+        password={password}
+        errors={errors}
+        onIdChange={handleIdChange}
+        onPasswordChange={handlePasswordChange}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }
+
+const SignInForm = ({ email, password, errors, onIdChange, onPasswordChange, onSubmit }) => (
+  <form className={styles.SignInInputField} onSubmit={onSubmit}>
+    <SignInInputField
+      label="Email"
+      value={email}
+      onChange={onIdChange}
+      errorMessage={errors.email}
+    />
+    <SignInInputField
+      label="Password"
+      type="password"
+      value={password}
+      onChange={onPasswordChange}
+      errorMessage={errors.password}
+    />
+    {errors.form && <div className={styles.error}>{errors.form}</div>}
+    <SignInButton onSubmit={onSubmit} label="Sign In" />
+  </form>
+);
+
 export default SignIn;
