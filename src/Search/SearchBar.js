@@ -15,7 +15,7 @@ function SearchBar() {
     handleDropDownKey,
     clickDropDownItem,
   } = useSearchRestaurants();
-
+ 
   const searchFormRef = useRef(null);
   const [dropdownWidth, setDropdownWidth] = useState("100%");
 
